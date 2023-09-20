@@ -34,32 +34,47 @@ public class CharacterMovement : MonoBehaviour
 
     void ProcessMovement()
     { 
-        // Moving the character foward according to the speed
+        // Moving the character forward according to the speed
         float speed = GetMovementSpeed();
-
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        // Making sure we dont have a Y velocity if we are grounded
-        // controller.isGrounded tells you if a character is grounded ( IE Touches the ground)
+ 
+        // Get the camera's forward and right vectors
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+ 
+        // Make sure to flatten the vectors so that they don't contain any vertical component
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+ 
+        // Normalize the vectors to ensure consistent speed in all directions
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+ 
+        // Calculate the movement direction based on input and camera orientation
+        Vector3 moveDirection = (cameraForward * Input.GetAxis("Vertical")) + (cameraRight * Input.GetAxis("Horizontal"));
+ 
+        // Apply the movement direction and speed
+        Vector3 movement = moveDirection.normalized * speed * Time.deltaTime;
+ 
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
         {
-            if (Input.GetButtonDown("Jump") )
+            if (Input.GetButtonDown("Jump"))
             {
                 gravity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             }
-            else 
+            else
             {
                 // Dont apply gravity if grounded and not jumping
                 gravity.y = -1.0f;
             }
         }
-        else 
+        else
         {
             // Since there is no physics applied on character controller we have this applies to reapply gravity
             gravity.y += gravityValue * Time.deltaTime;
-        }  
-        Vector3 movement = move.z *transform.forward  + move.x * transform.right;
-        playerVelocity = gravity * Time.deltaTime + movement * Time.deltaTime * speed;
+        }
+        // Apply gravity and move the character
+        playerVelocity = gravity * Time.deltaTime + movement;
         controller.Move(playerVelocity);
     }
 
