@@ -78,12 +78,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnAnimatorMove()
     {
         // If root motion is enabled, apply the animation's motion directly to the controller
-        if (animator.applyRootMotion)
-        {
-            Vector3 velocity = animator.deltaPosition;
-            velocity.y = playerVelocity.y * Time.deltaTime; // Preserve vertical movement (gravity, jump)
-            controller.Move(velocity);
-        }
+       
+        Vector3 velocity = animator.deltaPosition;
+        velocity.y = playerVelocity.y * Time.deltaTime; // Preserve vertical movement (gravity, jump)
+        controller.Move(velocity);
+        
     }
 
     public float GetMoveSpeed()
