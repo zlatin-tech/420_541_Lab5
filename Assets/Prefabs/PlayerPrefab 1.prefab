@@ -1575,8 +1575,8 @@ GameObject:
   - component: {fileID: 4936421152219431250}
   - component: {fileID: 6718690084881166210}
   m_Layer: 0
-  m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_Name: PlayerPrefab 1
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,7 +1615,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!114 &4936421152219431250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,12 +1628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f188286ef6f4de438461e99982ba925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {x: 0, y: 0, z: 0}
-  playerVelocity: {x: 0, y: 0, z: 0}
-  isOnGround: 0
-  gravityValue: -9.81
   walkSpeed: 5
   runSpeed: 8
+  jumpHeight: 2
+  maxJumpCount: 1
+  gravity: -9.18
+  isGrounded: 0
+  isRunning: 0
 --- !u!95 &6718690084881166210
 Animator:
   serializedVersion: 5

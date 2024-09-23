@@ -5,14 +5,19 @@ using UnityEngine;
 public class PlayerAnimationManager : MonoBehaviour
 {
   private Animator animator;
-  private CharacterMovement movement;
+  private PlayerMovement movement;
   public void Start()
   {
       animator = GetComponent<Animator>();
-      movement = GetComponent<CharacterMovement>();
+      movement = GetComponent<PlayerMovement>();
   }
   public void LateUpdate()
   {
+      if (animator == null || movement == null)
+      {
+        return;
+      }
+
       animator.SetFloat("CharacterSpeed", movement.GetMoveSpeed());
       animator.SetBool("IsFalling",!movement.isGrounded);
       if (Input.GetButtonUp("Fire1"))
