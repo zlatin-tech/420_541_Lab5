@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     
     public void Update()
     {
-        isGrounded = GetGrounded();
+        isGrounded = controller.isGrounded;
         // Only process input and movement if root motion is not applied
         if (!animator.applyRootMotion)
         {

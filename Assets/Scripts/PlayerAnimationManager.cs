@@ -14,7 +14,7 @@ public class PlayerAnimationManager : MonoBehaviour
   public void LateUpdate()
   {
       animator.SetFloat("CharacterSpeed", movement.GetMoveSpeed());
-      animator.SetBool("IsFalling",!movement.GetGrounded());
+      animator.SetBool("IsFalling",!movement.isGrounded);
       if (Input.GetButtonUp("Fire1"))
       {
         animator.SetTrigger("doRoll");
